@@ -55,7 +55,7 @@ def make_autocomplete(attribute_name):
     return autocomplete_options
 
 # Register the command with autocomplete
-@bot.tree.command(name="denick", description="Set active cosmetics for various items")
+@bot.tree.command(name="cosmeticleaderboard", description="Set active cosmetics for various items")
 @app_commands.describe(
     activeislandtopper="Choose an island topper",
     activeglyph="Choose a glyph",
@@ -82,7 +82,7 @@ def make_autocomplete(attribute_name):
     activebeddestroy=make_autocomplete("activebeddestroy"),
     activewoodtype=make_autocomplete("activewoodtype")
 )
-async def denick(
+async def cosmeticleaderboard(
     interaction: discord.Interaction,
     activeislandtopper: str = None,
     activeglyph: str = None,
@@ -116,7 +116,7 @@ async def denick(
 
     # Log the user's command input and settings
     user_info = f"User: {interaction.user.name}#{interaction.user.discriminator} (ID: {interaction.user.id})"
-    command_info = f"Command: denick | Settings: {filtered_attributes if filtered_attributes else 'No valid settings'}"
+    command_info = f"Command: cosmeticleaderboard | Settings: {filtered_attributes if filtered_attributes else 'No valid settings'}"
     logging.info(f"{user_info} - {command_info}")
 
     # Create the response message only with non-None attributes
@@ -133,17 +133,17 @@ async def denick(
         "cosmetics": filtered_attributes
     }
 
-    # Write the new data to 'denickfilter.json' (overwrites the file)
-    with open("json/denickfilter.json", "w", encoding="utf-8") as f:
+    # Write the new data to 'cosmeticleaderboardfilter.json' (overwrites the file)
+    with open("json/cosmeticleaderboardfilter.json", "w", encoding="utf-8") as f:
         json.dump(new_data, f, indent=4, ensure_ascii=False)
 
     try:
-        result = subprocess.run(["python", 'scripts/discordbot/botscripts/denick.py'], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding='utf-8')
+        result = subprocess.run(["python", 'scripts/discordbot/botscripts/cosmeticleaderboard.py'], check=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True, encoding='utf-8')
         # Capture the output from stdout and stderr
         output = result.stdout.strip()
         error_output = result.stderr.strip()    
         if output:
-            response += f"\n**Denick**:\n{output}"
+            response += f"\n**cosmeticleaderboard**:\n{output}"
         if error_output:
             response += f"\nScript Error Output:\n{error_output}"
 

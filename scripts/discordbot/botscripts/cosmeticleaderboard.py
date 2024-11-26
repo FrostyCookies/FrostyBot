@@ -59,7 +59,7 @@ if __name__ == "__main__":
     # Path to your JSON file
     cosmetics_file = 'json/cosmetics.json'
     
-    with open('json/denickfilter.json', 'r') as file:
+    with open('json/cosmeticleaderboardfilter.json', 'r') as file:
         filter = json.load(file)
     
     # Index filter value

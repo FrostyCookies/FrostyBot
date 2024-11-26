@@ -1,2 +1,2 @@
-apikey.env
-token.env
+settings/apikey.env
+settings/token.env
